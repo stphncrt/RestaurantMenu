@@ -80,16 +80,18 @@ const menu = [{
     },
 ];
 
-window.addEventListener("DOMContentLoaded", listRestaurantMenu);
-window.addEventListener("DOMContentLoaded", displayCategoryItem);
+window.addEventListener("DOMContentLoaded", function() {
+    listRestaurantMenu(menu);
+    displayCategoryItem();
+});
 
 const section = document.querySelector(".section-center");
 const categoryElement = document.querySelector(".btn-container");
 
-function listRestaurantMenu() {
+function listRestaurantMenu(menuList) {
     let sectionContent = "";
 
-    menu.forEach((item) => {
+    menuList.forEach((item) => {
         sectionContent += `<article class="menu-item">
                 <img src=${item.img} alt="menu item" class="photo" />
                 <div class="item-info">
@@ -107,7 +109,7 @@ function listRestaurantMenu() {
 }
 
 function displayCategoryItem() {
-    let categoryContent = `<button type="button" class="filter-btn" ="all">All</button>`;
+    let categoryContent = `<button type="button" class="filter-btn" data-id ="all">All</button>`;
 
     let categoryName = [];
     menu.forEach((item) => {
@@ -117,8 +119,20 @@ function displayCategoryItem() {
     });
 
     categoryName.forEach((category) => {
-        categoryContent += `<button type="button" class="filter-btn" ="${category}">${category}</button>`;
+        categoryContent += `<button type="button" class="filter-btn" data-id="${category}">${category}</button>`;
     });
 
     categoryElement.innerHTML = categoryContent;
+    const buttonElements = document.querySelectorAll(".filter-btn");
+
+    buttonElements.forEach((button) => {
+        button.addEventListener("click", function(e) {
+            const filteredMenu = menu.filter(
+                (item) => item.category === e.target.getAttribute("data-id"),
+            );
+            e.target.getAttribute("data-id") === "all" ?
+                listRestaurantMenu(menu) :
+                listRestaurantMenu(filteredMenu);
+        });
+    });
 }
