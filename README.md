@@ -1,6 +1,5 @@
 # RestaurantMenu
 Hi there 
 
-I'm Stephen from the Netherlands, and I do content on Development. I really enjoy learning languages and frameworks like React and React-Native. You can check out my repositories.
 
-[![Stephen Stats](https://github-readme-stats.vercel.app/api/?username=stphncrt&count_private=true&theme=tokyonight&showicons=true)]()
+<img src="https://github.com/stphncrt/RestaurantMenu.git" width='256'
